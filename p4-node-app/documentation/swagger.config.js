@@ -22,10 +22,6 @@ const options = {
             email: { 
               type: 'string' 
             },
-            role: { 
-              type: 'string', 
-              enum: ['user', 'admin'] 
-            },
             createdAt: { 
               type: 'string', 
               format: 'date-time' 
@@ -78,7 +74,8 @@ const options = {
               type: 'string' 
             },
             user: { 
-              type: 'string' 
+              type: 'string',
+              description: 'User ObjectId',
             },
             name: { 
               type: 'string' 
@@ -114,13 +111,16 @@ const options = {
               type: 'string' 
             },
             user: { 
-              type: 'string' 
+              type: 'string',
+              description: 'User ObjectId',
             },
             account: { 
-              type: 'string' 
+              type: 'string',
+              description: 'Account ObjectId', 
             },
             category: { 
-              type: 'string' 
+              type: 'string',
+              description: 'Category ObjectId'
             },
             type: { 
               type: 'string', 
@@ -157,10 +157,12 @@ const options = {
               type: 'string' 
             },
             user: { 
-              type: 'string' 
+              type: 'string',
+              description: 'User ObjectId' 
             },
             category: { 
-              type: 'string' 
+              type: 'string', 
+              description: 'Category ObjectId'
             },
             amount: { 
               type: 'number' 
@@ -225,7 +227,7 @@ const options = {
       }
     ],
   },
-  apis: ['./routes/*.js'], // scans all your route files for @swagger blocks
+  apis: ['./routes/*.js'],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
