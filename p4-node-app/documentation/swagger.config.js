@@ -190,8 +190,12 @@ const options = {
     },
     servers: [
       {
+        url: 'https://spendwiseapi.onrender.com',
+        description: 'prod'
+      },
+      {
         url: 'http://localhost:5555',
-        description: 'dev',
+        description: 'dev'
       }
     ],
     tags: [
