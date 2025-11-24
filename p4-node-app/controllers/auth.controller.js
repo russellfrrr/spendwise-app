@@ -13,11 +13,11 @@ const register = async (req, res) => {
     const { name, email, password } = req.body;
     const { token } = await registerUser(name, email, password);
 
-    res.cookie('token', token, {
+    res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
-      sameSite: 'strict',
-    })
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    });
 
     const responseObj = {
       success: true, 
@@ -38,12 +38,11 @@ const signIn = async (req, res) => {
     const { email, password } = req.body;
     const { user, token } = await signInUser(email, password);
 
-    res.cookie('token', token, {
+    res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
-      sameSite: 'strict',
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     });
-
     const responseObj = {
       success: true,
       message: 'Signed in successfully!',
@@ -60,7 +59,12 @@ const signIn = async (req, res) => {
 }
 
 const signOut = async (req, res) => {
-  res.clearCookie('token');
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  });
+  
   res.status(200).json({ 
     success: true, 
     message: 'Signed out successfully!' 
