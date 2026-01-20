@@ -1,9 +1,14 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
 import { useAuth } from '../context/AuthContext.jsx';
 import api from '../api/axios.js';
 import walletIcon from '../assets/wallet.svg';
 
 const Landing = () => {
+  useEffect(() => {
+    document.title = 'SpendWise - Personal Finance Manager';
+  }, []);
+
   const [isLogin, setIsLogin] = useState(false);
 
   const [formData, setFormData] = useState({

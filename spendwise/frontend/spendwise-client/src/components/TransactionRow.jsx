@@ -1,9 +1,33 @@
-import { TableRow, TableCell, Chip, Typography, IconButton } from '@mui/material';
+import { TableRow, TableCell, Chip, Typography, IconButton, Box } from '@mui/material';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import RestoreIcon from '@mui/icons-material/Restore';
 
-const TransactionRow = ({ tx, showArchived, onArchive, onRestore }) => {
+const TransactionRow = ({ tx, showArchived, onArchive, onRestore, mobileView = false }) => {
   const isExpense = tx.type === 'expense';
+
+  if (mobileView) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
+        {showArchived ? (
+          <IconButton
+            size="small"
+            color="success"
+            onClick={() => onRestore?.(tx._id)}
+          >
+            <RestoreIcon fontSize="small" />
+          </IconButton>
+        ) : (
+          <IconButton
+            size="small"
+            color="warning"
+            onClick={() => onArchive?.(tx._id)}
+          >
+            <ArchiveIcon fontSize="small" />
+          </IconButton>
+        )}
+      </Box>
+    );
+  }
 
   return (
     <TableRow hover>

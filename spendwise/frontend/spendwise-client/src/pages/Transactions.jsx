@@ -35,6 +35,10 @@ const Transactions = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [editingCategory, setEditingCategory] = useState(null);
 
+  useEffect(() => {
+    document.title = 'Transactions - SpendWise';
+  }, []);
+
   const [state, dispatch] = useReducer(
     transactionsReducer,
     initialTransactionState
@@ -118,12 +122,13 @@ const Transactions = () => {
     <Box>
       {/* Header */}
       <Stack
-        direction="row"
+        direction={{ xs: 'column', md: 'row' }}
         justifyContent="space-between"
-        alignItems="center"
+        alignItems={{ xs: 'flex-start', md: 'center' }}
         mb={3}
+        spacing={2}
       >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap' }}>
           <Typography variant="h5" fontWeight={700}>
             Transactions
           </Typography>
@@ -136,8 +141,11 @@ const Transactions = () => {
         </Box>
 
 
-        <Stack direction="row" spacing={2}>
-          <Button onClick={() => setShowArchived(prev => !prev)}>
+        <Stack direction={{ xs: 'column-reverse', md: 'row' }} spacing={2} sx={{ width: { xs: '100%', md: 'auto' } }}>
+          <Button 
+            onClick={() => setShowArchived(prev => !prev)}
+            fullWidth={{ xs: true, md: false }}
+          >
             {showArchived
               ? 'Show Active Transactions'
               : 'Show Archived Transactions'}
@@ -147,6 +155,7 @@ const Transactions = () => {
             variant="contained"
             startIcon={<AddIcon />}
             onClick={() => setOpen(true)}
+            fullWidth={{ xs: true, md: false }}
           >
             Add Transaction
           </Button>
@@ -154,9 +163,9 @@ const Transactions = () => {
       </Stack>
 
       {/* Filters */}
-      <Stack direction="row" spacing={2} mb={3} alignItems="center">
+      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} mb={3} alignItems={{ xs: 'stretch', sm: 'center' }}>
         {/* Type filter */}
-        <FormControl size="small">
+        <FormControl size="small" sx={{ minWidth: { xs: '100%', sm: 120 } }}>
           <InputLabel>Type</InputLabel>
           <Select
             value={filter}
@@ -175,22 +184,24 @@ const Transactions = () => {
         </FormControl>
 
         {/* Category CRUD selector */}
-        <CategorySelect
-          categories={categories.filter(c => !c.isDeleted)}
-          value={selectedCategory}
-          onChange={setSelectedCategory}
-          onAdd={() => setCategoryOpen(true)}
-          onEdit={(cat) => {
-            setEditingCategory(cat);
-            setCategoryOpen(true);
-          }}
-          onArchive={async (id) => {
-            if (!window.confirm('Archive this category?')) return;
-            await api.patch(`/categories/${id}/archive`);
-            fetchMeta();
-            setSelectedCategory('');
-          }}
-        />
+        <Box sx={{ flex: 1, minWidth: { xs: '100%', sm: 'auto' } }}>
+          <CategorySelect
+            categories={categories.filter(c => !c.isDeleted)}
+            value={selectedCategory}
+            onChange={setSelectedCategory}
+            onAdd={() => setCategoryOpen(true)}
+            onEdit={(cat) => {
+              setEditingCategory(cat);
+              setCategoryOpen(true);
+            }}
+            onArchive={async (id) => {
+              if (!window.confirm('Archive this category?')) return;
+              await api.patch(`/categories/${id}/archive`);
+              fetchMeta();
+              setSelectedCategory('');
+            }}
+          />
+        </Box>
       </Stack>
 
 

@@ -20,21 +20,20 @@ const COLORS = ['#22c55e', '#ef4444'];
 
 const OverviewCharts = ({ income, expense, monthlyExpenses }) => {
   const hasPieData = income > 0 || expense > 0;
-  const hasBarData =
-    Array.isArray(monthlyExpenses) && monthlyExpenses.length > 0;
+  const hasBarData = Array.isArray(monthlyExpenses) && monthlyExpenses.length > 0;
 
   return (
     <Grid container spacing={3}>
       {/* PIE CHART */}
-      <Grid item xs={12} md={8}>
-        <Card sx={{ height: '100%', minHeight: 300, minWidth: 500 }}>
+      <Grid item xs={12} md={6}>
+        <Card sx={{ height: '100%', minHeight: { xs: 250, md: 300 } }}>
           <CardContent>
             <Typography fontWeight={600} mb={2}>
               Income vs Expense
             </Typography>
 
             {hasPieData ? (
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="100%" height={250}>
                 <PieChart>
                   <Pie
                     data={[
@@ -44,8 +43,8 @@ const OverviewCharts = ({ income, expense, monthlyExpenses }) => {
                     dataKey="value"
                     cx="50%"
                     cy="50%"
-                    outerRadius={110}
-                    label
+                    outerRadius={{ xs: 70, md: 110 }}
+                    label={{ fontSize: { xs: 10, md: 12 } }}
                   >
                     <Cell fill="#22c55e" />
                     <Cell fill="#ef4444" />
@@ -67,18 +66,18 @@ const OverviewCharts = ({ income, expense, monthlyExpenses }) => {
       </Grid>
 
       {/* BAR CHART */}
-      <Grid item xs={12} md={8}>
-        <Card sx={{ height: '100%', minHeight: 300, minWidth: 500 }}>
+      <Grid item xs={12} md={6}>
+        <Card sx={{ height: '100%', minHeight: { xs: 250, md: 300 } }}>
           <CardContent>
             <Typography fontWeight={600} mb={2}>
               Monthly Expenses
             </Typography>
 
             {hasBarData ? (
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="100%" height={250}>
                 <BarChart data={monthlyExpenses}>
-                  <XAxis dataKey="month" />
-                  <YAxis />
+                  <XAxis dataKey="month" tick={{ fontSize: { xs: 10, md: 12 } }} angle={{ xs: -45, md: 0 }} />
+                  <YAxis tick={{ fontSize: { xs: 10, md: 12 } }} />
                   <Tooltip />
                   <Bar dataKey="amount" />
                 </BarChart>

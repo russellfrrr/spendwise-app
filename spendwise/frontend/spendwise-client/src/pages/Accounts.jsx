@@ -30,6 +30,10 @@ const Accounts = () => {
   const [loading, setLoading] = useState(false);
   const [editingAccount, setEditingAccount] = useState(null);
 
+  useEffect(() => {
+    document.title = 'Accounts - SpendWise';
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     type: '',
@@ -110,8 +114,15 @@ const Accounts = () => {
   return (
     <Box>
       {/* Header */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+      <Box sx={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: { xs: 'flex-start', md: 'center' }, 
+        mb: 3,
+        flexDirection: { xs: 'column', md: 'row' },
+        gap: 2
+      }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap' }}>
           <Typography variant="h5" fontWeight={700}>
             Accounts
           </Typography>
@@ -123,10 +134,10 @@ const Accounts = () => {
           />
         </Box>
 
-        <Box>
+        <Box sx={{ display: 'flex', gap: 1, flexDirection: { xs: 'column-reverse', md: 'row' }, width: { xs: '100%', md: 'auto' } }}>
           <Button
             onClick={() => setShowArchived(prev => !prev)}
-            sx={{ mr: 2 }}
+            fullWidth={{ xs: true, md: false }}
           >
             {showArchived ? 'Show Active Accounts' : 'Show Archived Accounts'}
           </Button>
@@ -135,6 +146,7 @@ const Accounts = () => {
             variant="contained"
             startIcon={<AddIcon />}
             onClick={() => setOpen(true)}
+            fullWidth={{ xs: true, md: false }}
           >
             Add Account
           </Button>

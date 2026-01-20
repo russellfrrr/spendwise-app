@@ -22,8 +22,8 @@ const CategorySelect = ({
   const selected = categories.find(c => c._id === value);
 
   return (
-    <Stack direction="row" spacing={1} alignItems="center">
-      <FormControl size="small" sx={{ minWidth: 180 }}>
+    <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} alignItems={{ xs: 'stretch', sm: 'center' }}>
+      <FormControl size="small" sx={{ minWidth: { xs: '100%', sm: 180 } }}>
         <InputLabel>Category</InputLabel>
         <Select
           value={value || ''}
@@ -42,36 +42,38 @@ const CategorySelect = ({
         </Select>
       </FormControl>
 
-      <Tooltip title="Add Category">
-        <IconButton size="small" onClick={onAdd}>
-          <AddIcon />
-        </IconButton>
-      </Tooltip>
-
-      <Tooltip title="Edit Category">
-        <span>
-          <IconButton
-            size="small"
-            disabled={!selected}
-            onClick={() => onEdit(selected)}
-          >
-            <EditIcon />
+      <Stack direction="row" spacing={1}>
+        <Tooltip title="Add Category">
+          <IconButton size="small" onClick={onAdd}>
+            <AddIcon />
           </IconButton>
-        </span>
-      </Tooltip>
+        </Tooltip>
 
-      <Tooltip title="Archive Category">
-        <span>
-          <IconButton
-            size="small"
-            disabled={!selected}
-            color="warning"
-            onClick={() => onArchive(selected._id)}
-          >
-            <ArchiveIcon />
-          </IconButton>
-        </span>
-      </Tooltip>
+        <Tooltip title="Edit Category">
+          <span>
+            <IconButton
+              size="small"
+              disabled={!selected}
+              onClick={() => onEdit(selected)}
+            >
+              <EditIcon />
+            </IconButton>
+          </span>
+        </Tooltip>
+
+        <Tooltip title="Archive Category">
+          <span>
+            <IconButton
+              size="small"
+              disabled={!selected}
+              color="warning"
+              onClick={() => onArchive(selected._id)}
+            >
+              <ArchiveIcon />
+            </IconButton>
+          </span>
+        </Tooltip>
+      </Stack>
     </Stack>
   );
 };

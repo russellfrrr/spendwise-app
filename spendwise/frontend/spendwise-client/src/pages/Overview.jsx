@@ -31,6 +31,9 @@ const Overview = () => {
     remaining: null,
   });
 
+  useEffect(() => {
+    document.title = 'Dashboard - SpendWise';
+  }, []);
 
   useEffect(() => {
     const loadStats = async () => {

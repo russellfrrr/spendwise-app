@@ -20,6 +20,10 @@ const Budgets = () => {
   const [showArchived, setShowArchived] = useState(false); 
   const [archivedBudgets, setArchivedBudgets] = useState([]);
 
+  useEffect(() => {
+    document.title = 'Budgets - SpendWise';
+  }, []);
+
   const totalBudget = budgets.reduce((sum, b) => sum + b.amount, 0);
   const totalUsed = budgets.reduce((sum, b) => sum + (b.used ?? 0), 0);
   const totalRemaining = totalBudget - totalUsed;
@@ -57,15 +61,28 @@ const Budgets = () => {
 
   return (
     <Box>
-      <Stack direction="row" justifyContent="space-between" mb={3}>
+      <Stack 
+        direction={{ xs: 'column', md: 'row' }} 
+        justifyContent="space-between" 
+        mb={3}
+        spacing={2}
+        alignItems={{ xs: 'flex-start', md: 'center' }}
+      >
         <Typography variant="h5" fontWeight={700}>Budgets</Typography>
 
-        <Stack direction="row" spacing={2}>
-          <Button onClick={() => setShowArchived(prev => !prev)}>
+        <Stack direction={{ xs: 'column-reverse', md: 'row' }} spacing={2} sx={{ width: { xs: '100%', md: 'auto' } }}>
+          <Button 
+            onClick={() => setShowArchived(prev => !prev)}
+            fullWidth={{ xs: true, md: false }}
+          >
             {showArchived ? 'Show Active Budgets' : 'Show Archived Budgets'}
           </Button>
 
-          <Button variant="contained" onClick={() => setOpen(true)}>
+          <Button 
+            variant="contained" 
+            onClick={() => setOpen(true)}
+            fullWidth={{ xs: true, md: false }}
+          >
             Add Budget
           </Button>
         </Stack>
@@ -91,7 +108,7 @@ const Budgets = () => {
           </Grid>
         ) : (
           displayed.map(b => (
-            <Grid item xs={12} md={4} lg={4} key={b._id}>
+            <Grid item xs={12} sm={6} md={4} key={b._id}>
               <BudgetCard
                 budget={b}
                 used={b.used ?? 0}
