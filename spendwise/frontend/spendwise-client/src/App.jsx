@@ -6,11 +6,16 @@ import Accounts from './pages/Accounts.jsx';
 import Transactions from './pages/Transactions.jsx';
 import Budgets from './pages/Budgets.jsx';
 import { useAuth } from './context/AuthContext.jsx';
+import { Box, CircularProgress } from '@mui/material';
 
 const App = () => {
   const { user, loading } = useAuth();
 
-  if (loading) return null;
+  if (loading) return (
+    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+      <CircularProgress />
+    </Box>
+  );
 
   return (
     <BrowserRouter>
