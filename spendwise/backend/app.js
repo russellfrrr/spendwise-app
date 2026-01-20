@@ -25,13 +25,13 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(helmet());
 const allowedOrigins = [
-  'http://localhost:5173', 
+  'http://localhost:5173', // local Vite frontend
 ];
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // allow server-to-server, Postman, curl
+      // allow server-to-server requests (Postman, curl, Render health checks)
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
