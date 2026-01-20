@@ -25,7 +25,8 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(helmet());
 const allowedOrigins = [
-  'http://localhost:5173', // local Vite frontend
+  'http://localhost:5173',
+  'https://spendwiseph.netlify.app', 
 ];
 
 app.use(
