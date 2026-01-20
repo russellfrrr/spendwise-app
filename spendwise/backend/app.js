@@ -24,10 +24,25 @@ connectDB();
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(helmet());
-app.use(cors({
-  origin: process.env.CLIENT_URL,
-  credentials: true
-})); 
+const allowedOrigins = [
+  'http://localhost:5173', 
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // allow server-to-server, Postman, curl
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
