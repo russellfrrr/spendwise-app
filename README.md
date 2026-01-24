@@ -39,29 +39,6 @@ Live Demo: [spendwiseph.netlify.app](https://spendwiseph.netlify.app)
 - MongoDB Atlas account (cloud) or local MongoDB
 - Git
 
-## Installation & Setup
-
-### 1. Clone the Repository
-```bash
-git clone <your-repo-url>
-cd spendwise
-```
-
-### 2. Backend Setup
-```bash
-cd backend
-npm install
-npm run dev
-```
-
-### 3. Frontend Setup
-```bash
-cd ../frontend/spendwise-client
-npm install
-npm run dev
-```
-
-The app will be available at http://localhost:5173
 
 ## Usage
 
@@ -108,18 +85,6 @@ spendwise/
         └── vite.config.js
 ```
 
-## Deployment
-
-### Frontend (Netlify)
-1. Push code to GitHub
-2. Connect repository to Netlify
-3. Set build command: npm run build
-4. Set publish directory: dist
-
-### Backend (Railway/Render)
-1. Push code to GitHub
-2. Connect to deployment platform
-3. Platform will auto-deploy
 
 ## 🧪 Testing
 
@@ -154,7 +119,7 @@ npm run deve
 - Filter by transaction type, category, account
 - Search and sort capabilities
 
-## 🐛 Known Issues & Troubleshooting
+## Known Issues & Troubleshooting
 
 **404 on page refresh:**
 - Make sure `_redirects` file exists in `frontend/public/`
@@ -163,7 +128,7 @@ npm run deve
 **API Connection Errors:**
 - Verify backend URL in frontend `.env`
 - Check CORS settings in backend
-- ETroubleshooting
+- Troubleshooting
 
 404 on page refresh:
 - Make sure _redirects file exists in frontend/public/
