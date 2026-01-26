@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useAuth } from '../context/AuthContext.jsx';
 import api from '../api/axios.js';
 import walletIcon from '../assets/wallet.svg';
+import bgVideo from '../assets/spendwise-landing-video.mp4';
 
 const Landing = () => {
   useEffect(() => {
@@ -60,7 +61,7 @@ const Landing = () => {
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight font-brand">
             SpendWise
           </h1>
-      </div>
+        </div>
 
         <p className="text-base md:text-lg text-slate-300 mb-6 md:mb-8 leading-relaxed max-w-md">
           BayaniJuan's personal finance companion to help you take control of your spending and achieve your financial goals.
@@ -74,8 +75,21 @@ const Landing = () => {
       </div>
 
       {/* RIGHT */}
-      <div className="order-2 md:order-none flex h-full items-center justify-center bg-slate-100">
-        <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm mx-4">
+      <div className="order-2 md:order-none relative overflow-hidden flex h-full items-center justify-center bg-slate-100">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-50 scale-110"
+        >
+          <source src={bgVideo} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        <div className="absolute inset-0 bg-white/10"></div>
+
+        <div className="relative z-10 bg-white p-8 rounded-lg shadow-md w-full max-w-sm mx-4">
           <h2 className="text-2xl font-semibold mb-6">
             {isLogin ? 'Log in' : 'Create an account'}
           </h2>
