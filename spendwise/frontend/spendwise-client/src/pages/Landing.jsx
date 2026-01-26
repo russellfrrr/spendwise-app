@@ -93,6 +93,7 @@ const Landing = () => {
                   onChange={handleChange}
                   className="w-full border border-slate-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-900"
                   placeholder="Juan Dela Cruz"
+                  autoComplete="name"
                 />
               </div>
             )}
@@ -108,6 +109,7 @@ const Landing = () => {
                 onChange={handleChange}
                 className="w-full border border-slate-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-900"
                 placeholder="you@mail.com"
+                autoComplete="email"
               />
             </div>
 
@@ -122,6 +124,7 @@ const Landing = () => {
                 onChange={handleChange}
                 className="w-full border border-slate-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-900"
                 placeholder="••••••••"
+                autoComplete={isLogin ? "current-password" : "new-password"}
               />
             </div>
 

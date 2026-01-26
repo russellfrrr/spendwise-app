@@ -12,6 +12,10 @@ export const AuthProvider = ({ children }) => {
       const res = await api.get('/auth/me');
       setUser(res.data.user);
     } catch (err) {
+      // 401 is expected when user is not logged in
+      if (err.response?.status !== 401) {
+        console.error('Failed to fetch user:', err);
+      }
       setUser(null);
     } finally {
       setLoading(false);
